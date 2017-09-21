@@ -130,6 +130,13 @@ objects:
         - name: cockroachdb
           image: ${DB_IMAGE}
           imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 10m
+              memory: 124Mi
+            limits:
+              cpu: ${CPU_LIMIT}
+              memory: ${MEMORY_LIMIT}
           ports:
           - containerPort: 26257
             name: grpc
@@ -200,3 +207,13 @@ parameters:
   name: VOLUME_SIZE
   required: true
   value: 1Gi
+- description: The CockroachDB memory limit
+  displayName: Memory Limit
+  name: MEMORY_LIMIT
+  required: true
+  value: 256Mi
+- description: The CockroachDB CPU limit
+  displayName: CPU Limit
+  name: CPU_LIMIT
+  required: true
+  value: 100m
